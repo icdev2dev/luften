@@ -11,6 +11,9 @@
     import Logout from './logout.svelte';
 
     import { Route, Router, Link, navigate } from "svelte-routing";
+    import University from "./university.svelte";
+    import { compile } from "svelte/compiler";
+    import Computerscience from "./computerscience.svelte";
    
     $: userRole = (JSON.parse(localStorage.getItem('user')))?.role
     
@@ -23,7 +26,11 @@
     { name: 'Home', route: '/', component: HomePage, path: "/" },
     { name: 'Users', route: '/users', component: UsersPage, path: "/users" },
     { name: 'Administration', route: '/admin', component: Administration, path: "/admin/*" },
-    { name: 'Core Issues', route: '/coreissues', component: CoreIssuesPage, path: '/coreissues' }
+    { name: 'Core Issues', route: '/coreissues', component: CoreIssuesPage, path: '/coreissues' },
+    { name: 'University', route: '/university', component: University, path: '/university' },
+    { name: 'computerscience', route: '/computerscience', component: Computerscience, path: '/computerscience' }
+
+
   
   ];
 
