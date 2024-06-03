@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
    
 
     let projects = [
@@ -46,4 +46,4 @@
     .project-card h2 {
         margin-top: 0;
     }
-</style>
+</style> -->

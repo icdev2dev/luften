@@ -14,6 +14,7 @@
     import University from "./university.svelte";
     import { compile } from "svelte/compiler";
     import Computerscience from "./computerscience.svelte";
+    import Admin from "./Admin.svelte";
    
     $: userRole = (JSON.parse(localStorage.getItem('user')))?.role
     
@@ -28,7 +29,8 @@
     { name: 'Administration', route: '/admin', component: Administration, path: "/admin/*" },
     { name: 'Core Issues', route: '/coreissues', component: CoreIssuesPage, path: '/coreissues' },
     { name: 'University', route: '/university', component: University, path: '/university' },
-    { name: 'computerscience', route: '/computerscience', component: Computerscience, path: '/computerscience' }
+    { name: 'Admin', route: '/admin', component: Admin, path: '/admin' },
+    //{ name: 'computerscience', route: '/computerscience', component: Computerscience, path: '/computerscience' }
 
 
   
