@@ -24,10 +24,11 @@
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 25px;
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s;
+    font-size: larger;
   }
   
   .logout-button:hover {

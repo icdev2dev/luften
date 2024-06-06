@@ -30,7 +30,7 @@
           //navigate('/');
           window.location.href = '/'
         } else if (role  === 'user') {
-          navigate('/university');
+          navigate('/users');
         }
         else{
           console.log("login failed")

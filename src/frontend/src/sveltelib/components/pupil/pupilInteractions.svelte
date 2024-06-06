@@ -113,7 +113,7 @@
 </script>
 
 
-<div bind:this={container} class="messages-container">
+<div bind:this={container} >
 
     {#if pupilMessages.length > 0}
     
