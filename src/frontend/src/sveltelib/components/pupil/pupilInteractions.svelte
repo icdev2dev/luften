@@ -97,11 +97,13 @@
         console.log("pupil" + pupilMessage)
 
         if (pupilMessage[2] == 'user') {
-            return marked (" **"+$selectedPupil[1] + "**" + "\n\n" + pupilMessage[1][0]['text']['value'])
+            // return marked (" **"+$selectedPupil[1] + "**" + "\n\n" + pupilMessage[1][0]['text']['value'])
+            return marked(pupilMessage[1][0]['text']['value'])
         }
         else {
             if ( pupilMessage[2] != null){
-              return marked (" **Reading Tutor**" + "\n\n" + pupilMessage[1][0]['text']['value'])
+            //   return marked (" **Reading Tutor**" + "\n\n" + pupilMessage[1][0]['text']['value'])
+            return marked(pupilMessage[1][0]['text']['value'])
             }
         }
     }
@@ -118,9 +120,17 @@
     {#if pupilMessages.length > 0}
     
         {#each pupilMessages as pupilMessage }
-            <div>
+            {#if pupilMessage[2]=="user"}
+            <div class="user-message">
                 {@html displayPupilMessage(pupilMessage)}
             </div>
+            {/if}
+
+            {#if pupilMessage[2]=="assistant"}
+            <div class="assistant-message">
+                {@html displayPupilMessage(pupilMessage)}
+            </div>
+            {/if}
         {/each}
 
     {/if}
@@ -137,5 +147,15 @@
     .messages-container {
         overflow-y: auto; /* Allows scrolling */
         max-height: 550px; /* Adjust max-height as necessary */
+    }
+
+    .user-message{
+        background-color:rgb(0, 217, 255);
+        color: white;
+    }
+
+    .assistant-message{
+        background-color: white;
+        color: black;
     }
 </style>
