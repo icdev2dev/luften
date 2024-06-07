@@ -54,10 +54,10 @@
         </div>
 
         <div class="containervert">
-            <div class="pupil-interactions">
+            <div class="pupil-interactions-admin">
                 <PupilInteractions></PupilInteractions>
             </div>
-            <div class="pupil-interaction">
+            <div class="pupil-interaction-admin">
             <PupilInteraction></PupilInteraction>
             </div>
         </div>
@@ -220,6 +220,18 @@
         width: 96%;
         margin-right: 2%;
         margin-left: 2%;
+        flex: 0 1 auto; /* Does not grow, but can shrink to fit content */
+    }
+
+    .pupil-interactions-admin {
+    
+        flex: 1; /* Allows this component to grow and fill the space but not beyond */
+        width: 66%;
+    }
+
+    /* Container for the input area should not grow */
+    .pupil-interaction-admin {
+        width: 33%;
         flex: 0 1 auto; /* Does not grow, but can shrink to fit content */
     }
 
