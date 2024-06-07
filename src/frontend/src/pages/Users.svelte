@@ -3,7 +3,8 @@
     import { listPupils, getPupil } from "../dataservices";
     import { selectedPupil} from "../stores/selectedPupil";
     import Logout from "./logout.svelte";
-    
+    import pic from "../assets/images/Avatar.jpg";
+    import pic1 from "../assets/images/illustrator.jpg";
 
     import PupilInteraction from "../sveltelib/components/pupil/pupilInteraction.svelte";
     import PupilInteractions from "../sveltelib/components/pupil/pupilInteractions.svelte";
@@ -64,10 +65,39 @@
 {/if}
 
 {#if userRole == "user" && loginCheck}
-    <ul>
+    <!-- <ul>
         <li><Logout /></li>
-    </ul>
+    </ul> -->
+    <header>
+        <div class="logo">           
+            <img src={pic} alt="Reading Tutor Logo" />
+            <span>Reading Tutor</span>
+        </div>
+      <div >  <Logout /> </div>
+    </header>
+
     <div class="container-user">
+
+        <div class="welcome-message">
+                <img src={pic1} alt="Illustration" />
+                <div>
+                    <h1>Reading Tutor</h1>
+                    <p>Hi, there! I am your Reading Tutor! I am here to help you read stories, learn new words, and have lots of fun along the way! Let me know when you are ready to start reading.</p>
+                </div>
+        </div>
+
+        <div class="user-pupil-messages">
+            <div class="pupil-interactions">
+                <PupilInteractions />
+            </div>
+            <div class="pupil-interaction">
+                <PupilInteraction />
+            </div>
+        </div>
+
+    </div>
+
+    <!-- <div class="container-user">
 
         <div class="containervert">
             <div class="pupil-interactions">
@@ -77,7 +107,7 @@
             <PupilInteraction></PupilInteraction>
             </div>
         </div>
-    </div>
+    </div> -->
 {/if}
 
 <style>
@@ -87,10 +117,65 @@
       width: 1500px;
     }
 
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(255, 255, 255);
+        padding: 10px 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: black; /* Set text color to black */
+    }
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .logo span {
+        font-weight: bold; /* Make the text bold */
+        color: black; /* Ensure the text color is black */
+        font-size: x-large;
+    }
+
     .container-user {
-      display: flex;
-      flex-direction: row; /* Horizontal layout by default */
-      width: 1500px;
+        display: flex;
+        flex-direction: column; /* Horizontal layout by default */
+        width: 1500px;
+        background-image: url('../assets/images/background2.jpeg');
+        background-size: cover;
+    }
+
+    .welcome-message {
+        display: flex;
+        align-items: center;
+        background-color: #4a90e2;
+        color: white;
+        border-radius: 20px;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .welcome-message img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin-right: 20px;
+    }
+
+    .welcome-message h1 {
+        margin: 0;
+        font-size: 3em;
+    }
+
+    .welcome-message p {
+        margin: 5px 0 0 0;
+        font-size: x-large;
     }
 
     .containervert-sidebar {
@@ -107,16 +192,26 @@
       width: 87%;
     }
 
+    .user-pupil-messages{
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
  /* Specific to the component containing the messages */
     .pupil-interactions {
     
         flex: 1; /* Allows this component to grow and fill the space but not beyond */
-        width: 66%;
+        width: 95%;
+        margin-right: 2.5%;
+        margin-left: 2.5%;
     }
 
     /* Container for the input area should not grow */
     .pupil-interaction {
-        width: 33%;
+        width: 96%;
+        margin-right: 2%;
+        margin-left: 2%;
         flex: 0 1 auto; /* Does not grow, but can shrink to fit content */
     }
 
