@@ -146,16 +146,32 @@
 <style>
     .messages-container {
         overflow-y: auto; /* Allows scrolling */
-        max-height: 550px; /* Adjust max-height as necessary */
+        /* max-height: 550px; Adjust max-height as necessary */
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2.5%;
     }
 
     .user-message{
-        background-color:rgb(0, 217, 255);
-        color: white;
+        background-color: #4f8df5;
+        color: #fff;
+        align-self: flex-start;
+        text-align: right;
+        max-width: 45%;
+        padding: 7px;
+        border-radius: 15px 15px 15px 0;
+        
     }
 
     .assistant-message{
-        background-color: white;
-        color: black;
+        background-color: #fff;
+        color: #000;
+        border: 1px solid #ddd;
+        align-self: flex-end;
+        max-width: 45%;
+        padding: 7px;
+        border-radius: 15px 15px 0 15px;
     }
 </style>
