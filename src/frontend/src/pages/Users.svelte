@@ -156,25 +156,33 @@
         align-items: center;
         background-color: #4a90e2;
         color: white;
-        border-radius: 20px;
-        padding: 10px;
-        margin: 10px;
+        border-radius: 200px;
+        padding: 70px;
+        margin: 29px;
+        position: relative;
+        text-align: left;
     }
 
     .welcome-message img {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        margin-right: 20px;
+        width: 300px;
+        height: 300px;
+        top: -10px;
+        border-radius: 60%;
+        position: absolute;
+        left: -15px;
+        box-shadow: 10px 0px 10px 0px rgba(0, 0, 0, 0.75);
+        /* margin-right: 20px; */
     }
 
     .welcome-message h1 {
         margin: 0;
         font-size: 3em;
+        padding-left: 17.5%;
     }
 
     .welcome-message p {
-        margin: 5px 0 0 0;
+        margin: 5px 5px 5px 5px;
+        padding-left: 17.5%;
         font-size: x-large;
     }
 
