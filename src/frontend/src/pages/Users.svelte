@@ -147,7 +147,8 @@
         display: flex;
         flex-direction: column; /* Horizontal layout by default */
         width: 1500px;
-        background-image: url('../assets/images/background2.jpeg');
+        /* background-image: url('../assets/images/background2.jpeg'); */
+        background-color: #cee1d8;
         background-size: cover;
     }
 
