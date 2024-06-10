@@ -82,7 +82,10 @@
                 <img src={pic1} alt="Illustration" />
                 <div>
                     <h1>Reading Tutor</h1>
-                    <p>Hi, there! I am your Reading Tutor! I am here to help you read stories, learn new words, and have lots of fun along the way! Let me know when you are ready to start reading.</p>
+                    <p>👋 Hi there! I'm your Reading Tutor! 📚😊
+I am here to help you read stories, learn new words, and have lots of fun along the way!
+Let me know when you are ready to start reading. 📖✨
+</p>
                 </div>
         </div>
 
