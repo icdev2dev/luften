@@ -31,6 +31,27 @@ app = Flask(__name__)
 CORS(app=app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+
+
+
+ # we used this insted for the Tim issue 
+
+# CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+# socketio = SocketIO(app, cors_allowed_origins=["http://localhost:5173"])
+
+# @app.after_request
+# def after_request(response):
+#     print("inside requesr")
+#     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5173')
+#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+#     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+#     return response
+
+
+
+
+
+
 if not Pupil.list():
     print("default pupil created - username : admin, password: admin")
     Pupil.create(pupil_name="admin", pupil_password="admin", pupil_role="admin")
@@ -472,7 +493,7 @@ if __name__ == "__main__":
     link_functions_to_flask(app=app)
 #    link_functions_to_socketio(socketio=socketio)
 
-    socketio.run(app)
+    socketio.run(app)  #debug=true
 
 
 

@@ -13,8 +13,11 @@
     import { Route, Router, Link, navigate } from "svelte-routing";
     import University from "./university.svelte";
     import { compile } from "svelte/compiler";
-    import Computerscience from "./computerscience.svelte";
-    import Admin from "./Admin.svelte";
+   
+    import Admin from "./UniAdmin.svelte";
+    import Project from "./project.svelte";
+    import UniAdmin from "./UniAdmin.svelte";
+    import pojAdmin from "./pojAdmin.svelte";
    
     $: userRole = (JSON.parse(localStorage.getItem('user')))?.role
     
@@ -29,7 +32,9 @@
     { name: 'Administration', route: '/admin', component: Administration, path: "/admin/*" },
     { name: 'Core Issues', route: '/coreissues', component: CoreIssuesPage, path: '/coreissues' },
     { name: 'University', route: '/university', component: University, path: '/university' },
-    { name: 'Admin', route: '/admin', component: Admin, path: '/admin' },
+    { name: 'UniAdmin', route: '/UniAdmin', component: UniAdmin, path: '/UniAdmin' },
+    { name: 'project', route: '/project', component: Project, path: '/project' },
+    { name: 'pojAdmin', route: '/pojAdmin', component: pojAdmin, path: '/pojAdmin' }
     //{ name: 'computerscience', route: '/computerscience', component: Computerscience, path: '/computerscience' }
 
 

@@ -1,49 +1,60 @@
 <!-- src/UniversityPage.svelte -->
 <script>
     import { universities } from '../stores/universityStore';
-      import { navigate } from 'svelte-routing';
-  
-      let selectedUniversity = null;
-  
-      // Automatically subscribe to changes in the universities store
-      $: universityList = $universities;
-  
-      function selectUniversity(universityId) {
-          selectedUniversity = selectedUniversity === universityId ? null : universityId;
-      }
-  
-      function handleDepartmentClick(department) {
-          if (department === "Computer Science") {
-              navigate('/computerscience'); // Navigate to Computer Science page
-          } else {
-              console.log("Clicked on department:", department);
-          }
-      }
-  </script>
-  
-  <main>
-      <h1>Universities</h1>
-      <div class="university-container">
-          {#each universityList as university}
-              <div class="university-card" on:click={() => selectUniversity(university.id)}>
-                  <h2>{university.name}</h2>
-              </div>
-          {/each}
-      </div>
-  
-      {#if selectedUniversity !== null}
-          <div class="department-container show">
-              <h2>Departments at {universityList.find(u => u.id === selectedUniversity).name}</h2>
-              <ul class="department-list">
-                  {#each universityList.find(u => u.id === selectedUniversity).departments as department}
-                      <li>
-                          <a href="#" on:click={() => handleDepartmentClick(department)}>{department}</a>
-                      </li>
-                  {/each}
-              </ul>
-          </div>
-      {/if}
-  </main>
+    import { projects } from '../stores/projectStore'; // Import projects store
+    import { get } from 'svelte/store';
+    import { navigate } from 'svelte-routing';
+
+    let selectedUniversity = null;
+
+    // Automatically subscribe to changes in the universities and projects store
+    $: universityList = $universities;
+    $: projectList = $projects;
+
+    function selectUniversity(universityId) {
+        selectedUniversity = selectedUniversity === universityId ? null : universityId;
+    }
+
+    function handleDepartmentClick(department) {
+        navigate(`/createproject/${department}`); // Navigate to Project Creation page for selected department
+    }
+
+    // Function to filter projects based on selected university and department
+    function getProjectsForDepartment(department) {
+        return projectList.filter(project => project.department === department);
+    }
+</script>
+
+<main>
+    <h1>Universities</h1>
+    <div class="university-container">
+        {#each universityList as university}
+            <div class="university-card" on:click={() => selectUniversity(university.id)}>
+                <h2>{university.name}</h2>
+            </div>
+        {/each}
+    </div>
+
+    {#if selectedUniversity !== null}
+        <div class="department-container show">
+            <h2>Departments at {universityList.find(u => u.id === selectedUniversity).name}</h2>
+            <ul class="department-list">
+                {#each universityList.find(u => u.id === selectedUniversity).departments as department}
+                    <li>
+                        <a href="#" on:click={() => handleDepartmentClick(department)}>{department}</a>
+                        <!-- Display projects for the department -->
+                        <ul>
+                            {#each getProjectsForDepartment(department) as project}
+                                <li>{project.name}</li>
+                            {/each}
+                        </ul>
+                    </li>
+                {/each}
+            </ul>
+        </div>
+    {/if}
+</main>
+
   
 <style>
     .university-container {

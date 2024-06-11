@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import io from 'socket.io-client';
-
+//can change to the 127.0.0.1 instead of localhost in macos 
 const socket = io('http://localhost:5000');
 export const socketStore = writable(socket);
 
