@@ -1,55 +1,71 @@
-<!-- src/ProjectPage.svelte -->
 <script>
-    import { projects } from '../stores/projectStore';
+    import { projects, selectedProject, selectProject } from '../stores/projectStore'; // Import projects store and functions
+    import { onDestroy } from 'svelte';
+
+    // Automatically subscribe to changes in the projects store
+    $: projectList = $projects;
+
+    let currentSelectedProject;
+    const unsubscribe = selectedProject.subscribe(value => {
+        currentSelectedProject = value;
+    });
+
+    onDestroy(() => {
+        unsubscribe();
+    });
+
+    function handleCardClick(project) {
+        if (currentSelectedProject === project) {
+            selectProject(null); // Deselect if the same project is clicked
+        } else {
+            selectProject(project); // Select the clicked project
+        }
+    }
 </script>
 
 <main>
-    <h1>All Projects</h1>
+    <h1>Projects</h1>
     <div class="project-container">
-        {#each $projects as project}
-            <div class="project-card">
-                <h2>{project.name}</h2>
-                <p>Department: {project.department}</p>
-                <p>Description: {project.description}</p>
+        {#each projectList as project}
+            <div class="project-card" on:click={() => handleCardClick(project)}>
+                <h3>{project.name}</h3>
+                <p>{project.department}</p>
             </div>
         {/each}
     </div>
+
+    {#if currentSelectedProject}
+        <div class="description-card">
+            <h3>{currentSelectedProject.name}</h3>
+            <p>{currentSelectedProject.description}</p>
+        </div>
+    {/if}
 </main>
 
 <style>
-    main {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        font-family: Arial, sans-serif;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
     .project-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        grid-gap: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 16px;
     }
-
     .project-card {
         border: 1px solid #ddd;
         border-radius: 8px;
         padding: 16px;
-        background-color: #f9f9f9;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.2s;
+        width: calc(33.333% - 32px);
+        box-sizing: border-box;
     }
-
-    .project-card h2 {
-        margin-bottom: 8px;
+    .project-card:hover {
+        transform: scale(1.05);
     }
-
-    .project-card p {
-        margin-top: 8px;
-        font-size: 14px;
-        color: #666;
+    .description-card {
+        margin-top: 16px;
+        background-color: black;
+        border-radius: 8px;
+        padding: 16px;
+        color: white;
     }
 </style>
