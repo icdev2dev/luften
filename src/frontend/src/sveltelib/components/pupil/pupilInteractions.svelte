@@ -13,6 +13,7 @@
     let container; // DOM reference for the messages container
     let previousMessageCount = 0; // to track if new messages have been added
 
+    let userRole = (JSON.parse(localStorage.getItem('user')))?.role;
 
     const currentStreamingMessage = writable("")
 
@@ -92,16 +93,34 @@
         return marked(data)
     }
 
+    function displayPupilMessage_user(pupilMessage) {
+
+        console.log("pupil" + pupilMessage)
+
+        if (pupilMessage[2] == 'user') {
+            // return marked (" **"+$selectedPupil[1] + "**" + "\n\n" + pupilMessage[1][0]['text']['value'])
+            return marked(pupilMessage[1][0]['text']['value'])
+        }
+        else {
+            if ( pupilMessage[2] != null){
+            //   return marked (" **Reading Tutor**" + "\n\n" + pupilMessage[1][0]['text']['value'])
+                return marked(pupilMessage[1][0]['text']['value'])
+            }
+        }
+    }
+
     function displayPupilMessage(pupilMessage) {
 
         console.log("pupil" + pupilMessage)
 
         if (pupilMessage[2] == 'user') {
             return marked (" **"+$selectedPupil[1] + "**" + "\n\n" + pupilMessage[1][0]['text']['value'])
+            //return marked(pupilMessage[1][0]['text']['value'])
         }
         else {
             if ( pupilMessage[2] != null){
-              return marked (" **Reading Tutor**" + "\n\n" + pupilMessage[1][0]['text']['value'])
+               return marked (" **Reading Tutor**" + "\n\n" + pupilMessage[1][0]['text']['value'])
+            //return marked(pupilMessage[1][0]['text']['value'])
             }
         }
     }
@@ -112,7 +131,36 @@
 
 </script>
 
+{#if userRole == "user"}
+<div bind:this={container} class="messages-container">
 
+    {#if pupilMessages.length > 0}
+    
+        {#each pupilMessages as pupilMessage }
+            {#if pupilMessage[2]=="user"}
+            <div class="user-message">
+                {@html displayPupilMessage_user(pupilMessage)}
+            </div>
+            {/if}
+
+            {#if pupilMessage[2]=="assistant"}
+            <div class="assistant-message">
+                {@html displayPupilMessage_user(pupilMessage)}
+            </div>
+            {/if}
+        {/each}
+
+    {/if}
+    {#if isStreaming}
+        <div class="streaming-message">
+            {@html displayPupilMessage_stream($currentStreamingMessage)}
+        </div>
+    {/if}
+
+</div>
+{/if}
+
+{#if userRole == "admin"}
 <div bind:this={container} class="messages-container">
 
     {#if pupilMessages.length > 0}
@@ -131,11 +179,38 @@
     {/if}
 
 </div>
+{/if}
 
 
 <style>
     .messages-container {
         overflow-y: auto; /* Allows scrolling */
-        max-height: 550px; /* Adjust max-height as necessary */
+        /* max-height: 550px; Adjust max-height as necessary */
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2.5%;
+    }
+
+    .user-message{
+        background-color: #4f8df5;
+        color: #fff;
+        align-self: flex-start;
+        text-align: right;
+        max-width: 45%;
+        padding: 7px;
+        border-radius: 15px 15px 15px 0;
+        
+    }
+
+    .assistant-message{
+        background-color: #fff;
+        color: #000;
+        border: 1px solid #ddd;
+        align-self: flex-end;
+        max-width: 45%;
+        padding: 7px;
+        border-radius: 15px 15px 0 15px;
     }
 </style>

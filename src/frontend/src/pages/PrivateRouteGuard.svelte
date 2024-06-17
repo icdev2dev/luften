@@ -24,6 +24,10 @@
     $: if (!$auth) {
         tick().then(() => navigate("/login", { replace: true }));
     }
+
+    // $: if($auth && userRole=="user"){
+    //     tick().then(() => navigate("/users", { replace: true }))
+    // }
     
     console.log("auth token", $auth)
     let tabs = [
@@ -32,13 +36,10 @@
     { name: 'Administration', route: '/admin', component: Administration, path: "/admin/*" },
     { name: 'Core Issues', route: '/coreissues', component: CoreIssuesPage, path: '/coreissues' },
     { name: 'University', route: '/university', component: University, path: '/university' },
-    { name: 'UniAdmin', route: '/UniAdmin', component: UniAdmin, path: '/UniAdmin' },
+    { name: 'UniAdmin', route: '/uniadmin', component: UniAdmin, path: '/uniadmin' },
     { name: 'project', route: '/project', component: Project, path: '/project' },
-    { name: 'pojAdmin', route: '/pojAdmin', component: pojAdmin, path: '/pojAdmin' }
+    { name: 'pojAdmin', route: '/pojadmin', component: pojAdmin, path: '/pojadmin' }
     //{ name: 'computerscience', route: '/computerscience', component: Computerscience, path: '/computerscience' }
-
-
-  
   ];
 
   // function handleLogout() {

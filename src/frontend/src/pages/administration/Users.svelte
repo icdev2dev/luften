@@ -371,11 +371,7 @@ async  function createUser() {
                         {/each}
                     </tr>
                     <tr>
-                        <td colspan={selectedUsers.length}>
-                            <div class="button-container">
-                                <button on:click={deleteUser}>Delete Selected User/s</button>
-                            </div>
-                        </td>
+                        
                     </tr>
                 </tbody>
             </table>
