@@ -28,13 +28,13 @@ PREF_MODEL = "gpt-3.5-turbo-1106"
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://54.167.157.145:3030"}})
-socketio = SocketIO(app, cors_allowed_origins=["http://54.167.157.145:3030"])
+CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:3030"}})
+socketio = SocketIO(app, cors_allowed_origins=["http://127.0.0.1:3030"])
 
 @app.after_request
 def after_request(response):
     print("inside requesr")
-    response.headers.add('Access-Control-Allow-Origin', 'http://54.167.157.145:3030')
+    response.headers.add('Access-Control-Allow-Origin', 'http://127.0.0.1:3030')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     return response# app.url_map.strict_slashes = False
@@ -480,7 +480,7 @@ if __name__ == "__main__":
     link_functions_to_flask(app=app)
 #    link_functions_to_socketio(socketio=socketio)
 
-    socketio.run(app, debug=True, host="0.0.0.0", port=8080)
+    socketio.run(app, debug=True)
 
 
 
